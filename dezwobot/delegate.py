@@ -100,7 +100,7 @@ class Delegate:
                 Andernfalls antworte mit "!delete" auf diesen Kommentar, um ihn
                 zu löschen. Du kannst deine Antwort anschließend auch selbst
                 löschen."""))
-        body.append("[Weitere Informationen gibt es hier.](https://example.org)")
+        body.append("[Weitere Informationen gibt es hier.](https://www.reddit.com/user/HerrZwoDezwo/comments/vz1jvf/)")
 
         comment = submission.reply(body="\n\n".join(body))
         comment.mod.distinguish(sticky=True)
