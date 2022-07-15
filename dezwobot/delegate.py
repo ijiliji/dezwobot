@@ -106,8 +106,6 @@ class Delegate:
         comment.mod.distinguish(sticky=True)
 
     def process_comment_reply(self, comment: praw.models.Comment):
-        comment.mark_read()
-
         submission = comment.submission
         op = submission.author
         if comment.author != op:
@@ -118,6 +116,8 @@ class Delegate:
         cid = comment.id
         if any(c for c in parent.replies if c.id != cid and c.author == op):
             return
+
+        comment.mark_read()
 
         if re.fullmatch(self.DELETE_REGEX, comment.body):
             parent.delete()
