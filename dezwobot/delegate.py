@@ -5,7 +5,7 @@ from textwrap import dedent
 from typing import Union
 
 import praw
-
+import tldextract
 
 class SubmissionType(enum.IntFlag):
     no_paywall                  = enum.auto()
@@ -17,7 +17,6 @@ class SubmissionType(enum.IntFlag):
 submission_types = {
     "reddit.com":           SubmissionType.no_paywall,
     "imgur.com":            SubmissionType.no_paywall,
-    "i.imgur.com":          SubmissionType.no_paywall,
     "youtube.com":          SubmissionType.no_paywall,
     "youtu.be":             SubmissionType.no_paywall,
 
@@ -145,5 +144,8 @@ class Delegate:
         self.admin.message(subject="bot message", message=body)
 
     def submission_type(self, submission):
+        exact_match = submission_types.get(submission.domain)
+        domain = ".".join(tldextract.extract(submission.domain)[1:])
+        domain_match = submission_types.get(domain)
         default = SubmissionType.dynamic_paywall | SubmissionType.dynamic_paywall_uncertain
-        return submission_types.get(submission, default)
+        return exact_match or domain_match or default
