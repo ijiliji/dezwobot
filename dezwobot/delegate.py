@@ -35,6 +35,8 @@ submission_types = {
     "netzpolitik.org":      SubmissionType.no_paywall,
     "t-online.de":          SubmissionType.no_paywall,
     "taz.de":               SubmissionType.no_paywall,
+    "derstandard.at":       SubmissionType.no_paywall,
+    "orf.at":               SubmissionType.no_paywall,
 
     "rnd.de":               SubmissionType.only_static_paywall,
 
