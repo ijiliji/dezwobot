@@ -98,11 +98,10 @@ class Delegate:
                 sicher, dass auch in diesem Falle mehr als nur die Überschrift
                 diskutiert werden kann."""))
             body.append(" ".join(parts))
-        elif st & st.only_static_paywall:
-            body.append(dedent("""\
-                Andernfalls antworte mit "!delete" auf diesen Kommentar, um ihn
-                zu löschen. Du kannst deine Antwort anschließend auch selbst
-                löschen."""))
+        body.append(dedent("""\
+            Andernfalls antworte mit "!delete" auf diesen Kommentar, um ihn zu
+            löschen. Du kannst deine Antwort anschließend auch selbst
+            löschen."""))
         body.append("[Weitere Informationen gibt es hier.](https://www.reddit.com/user/HerrZwoDezwo/comments/vz1jvf/)")
 
         comment = submission.reply(body="\n\n".join(body))
