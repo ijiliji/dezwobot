@@ -16,6 +16,7 @@ class SubmissionType(enum.IntFlag):
 
 submission_types = {
     "reddit.com":           SubmissionType.no_paywall,
+    "redd.it":              SubmissionType.no_paywall,
     "imgur.com":            SubmissionType.no_paywall,
     "youtube.com":          SubmissionType.no_paywall,
     "youtu.be":             SubmissionType.no_paywall,
@@ -50,6 +51,9 @@ submission_types = {
 class Delegate:
     DELETE_REGEX = re.compile(r"[^a-z0-9]*![^a-z]*delete[^a-z0-9]*")
 
+    # https://github.com/reddit-archive/reddit/blob/753b17407e9a9dca09558526805922de24133d53/r2/r2/models/subreddit.py#L114=
+    SELF_REGEX = re.compile(r"self\.[A-Za-z0-9][A-Za-z0-9_]{2,20}")
+
     def __init__(self, reddit, **kwargs):
         self.reddit = reddit
 
@@ -78,8 +82,6 @@ class Delegate:
             traceback.print_exc()
 
     def process_submission(self, submission: praw.models.Submission):
-        if submission.is_self or submission.is_reddit_media_domain:
-            return
         st = self.submission_type(submission)
         if st == st.no_paywall:
             return
@@ -147,6 +149,8 @@ class Delegate:
         self.admin.message(subject="bot message", message=body)
 
     def submission_type(self, submission):
+        if re.fullmatch(self.SELF_REGEX, submission.domain):
+            return SubmissionType.no_paywall
         exact_match = submission_types.get(submission.domain)
         domain = ".".join(tldextract.extract(submission.domain)[1:])
         domain_match = submission_types.get(domain)
