@@ -268,7 +268,7 @@ class Bot:
         if force and self.submissions or len(self.submissions) > v:
             with open(f"submissions-{int(time.time())}.pkl", "wb") as f:
                 pickle.dump(self.submissions[:v], f)
-                self.submissions = self.submissions[:v]
+                self.submissions = self.submissions[v:]
         if force and self.comments or len(self.comments) > v:
             with open(f"comments-{int(time.time())}.pkl", "wb") as f:
                 pickle.dump(self.comments[:v], f)
