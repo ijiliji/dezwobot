@@ -15,7 +15,7 @@ from dezwobot.util import Queue, RemoveComment
 
 
 @dataclasses.dataclass
-class Nominations:
+class Nomination:
     nominee: praw.models.Comment
     nominator: praw.models.Comment
     category: str
@@ -222,7 +222,7 @@ class Bot:
         categories = "Argument Information Sprache".split()
         for category, reason in matches:
             selected = [x for x in categories if x.casefold().startswith(category.casefold())]
-            self.nominations.append(Nominations(
+            self.nominations.append(Nomination(
                 parent,
                 comment,
                 selected[0] if len(selected) == 1 else "Misc",
