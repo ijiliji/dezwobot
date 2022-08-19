@@ -112,11 +112,11 @@ class Bot:
         if submission.banned_by and submission.banned_by != "AutoModerator":
             return
 
+        self.submissions.append(submission)
+
         st = self.submission_type(submission)
         if st == st.no_paywall:
             return
-
-        self.submissions.append(submission)
 
         body = [dedent(f"""\
             Danke für deine Einreichung! Falls der Artikel kostenpflichtig ist,
