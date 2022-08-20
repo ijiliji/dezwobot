@@ -275,16 +275,17 @@ class Bot:
                 self.comments = self.comments[v:]
 
     def snapshot_hint(self, submission):
-        link = f"https://archive.ph/submit/?url={submission.url}"
+        submit = f"https://archive.ph/submit/?url={submission.url}"
+        search = f"https://archive.ph/{submission.url}"
         return dedent(f"""\
             Falls der Artikel noch nicht kostenpflichtig ist, lässt sich ein
             Snapshot sehr einfach mit archive.ph erzeugen, nutze dazu
-            [diesen Link]({link}), um einen Snapshot im Hintergrund erstellen zu
-            lassen, und antworte bspw. mit folgendem Markdown auf den Kommentar
-            - der Link leitet auch auf den fertigen Snapshot weiter, kann also
-            sofort kommentiert werden:
+            [diesen Link]({submit}), um einen Snapshot im Hintergrund erstellen
+            zu lassen, und antworte mit [diesem Link]({search}), welcher nach
+            fertigen Snapshots sucht und damit sofort kommentiert werden kann -
+            nutze dafür bspw. folgendes Markdown:
 
-                [Snapshot]({link}).""")
+                [Snapshot]({search}).""")
 
     def print(self, *values):
         values = list(values)
