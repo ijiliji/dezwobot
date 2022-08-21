@@ -182,8 +182,9 @@ class Bot:
                 u/{comment.author} hat als Antwort auf diesen Kommentar eine
                 Zusammenfassung des Artikels bereitgestellt, danke dafür!""")
             parent.edit(body=body)
-            parent.mod.approve()
-            parent.mod.distinguish(sticky=True)
+            if parent.banned_by == self.me.name:
+                parent.mod.approve()
+                parent.mod.distinguish(sticky=True)
 
     def article_provided(self, comment):
         return "bereitgestellt" in comment.body
@@ -200,6 +201,7 @@ class Bot:
                 return
             if reply.banned_by == self.me.name:
                 reply.mod.approve()
+                reply.mod.distinguish(sticky=True)
 
         self.print("!article_request", comment.author, submission.domain, submission.permalink)
 
@@ -213,7 +215,7 @@ class Bot:
             reply.edit(body=body)
         else:
             reply = submission.reply(body=body)
-        reply.mod.distinguish(sticky=True)
+            reply.mod.distinguish(sticky=True)
         self.paywall_request.add(submission)
         self.paywall_request.add(reply)
 
