@@ -170,8 +170,11 @@ class Bot:
 
         if parent.author == self.me:
             comment.mark_read()
-        self.paywall_request.remove(parent)
-        self.paywall_request.remove(submission)
+        try:
+            self.paywall_request.remove(parent)
+            self.paywall_request.remove(submission)
+        except KeyError:
+            ...
         self.paywall_request_done.add(submission)
         if re.search(self.DELETE_REGEX, comment.body):
             parent.delete()
