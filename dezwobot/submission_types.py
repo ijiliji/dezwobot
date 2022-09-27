@@ -32,8 +32,8 @@ submission_types = {
     "reporterdesk.de":      SubmissionType.dynamic_paywall,
     "businessinsider.de":   SubmissionType.dynamic_paywall,
     "zeit.de":              SubmissionType.dynamic_paywall,
+    "tagesspiegel.de":      SubmissionType.dynamic_paywall,
 
-    "plus.tagesspiegel.de": SubmissionType.always_paywall,
     "cicero.de":            SubmissionType.always_paywall,
 
     "sueddeutsche.de":      sueddeutsche,
