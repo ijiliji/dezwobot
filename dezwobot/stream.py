@@ -75,8 +75,8 @@ class MentionStream(Stream):
 
     def process(self, item):
         self.bot.admin.message(
-            subject=f"bot: mentioned by {item.author} on {item.submission.title}",
-            message=f"https://reddit.com{item.context}\n\n{item.body}")
+            subject=f"bot: mentioned by {item.author} on {item.submission.title}[:100]",
+            message=f"https://reddit.com{item.context}  \n{item.submission.title}\n\n{item.body}")
         item.mark_read()
 
 
@@ -92,8 +92,8 @@ class MessageStream(Stream):
             item.mark_read()
             return
         self.bot.admin.message(
-            subject=f"bot: msg by {item.author}: {item.subject}",
-            message=f"https://reddit.com/message/messages/{item.id}\n\n{item.body}")
+            subject=f"bot: msg by {item.author}: {item.subject}"[:100],
+            message=f"https://reddit.com/message/messages/{item.id}  \n{item.subject}\n\n{item.body}")
         item.mark_read()
 
 
