@@ -111,6 +111,8 @@ class Bot:
             return
         if submission.banned_by and submission.banned_by != "AutoModerator":
             return
+        if submission.link_flair_template_id == "c3a93604-8237-11ed-aac0-8a01db1bde91":
+            return
 
         self.submissions.append(submission)
 
