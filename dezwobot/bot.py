@@ -25,7 +25,7 @@ class Nomination:
 class Bot:
     DELETE_REGEX = re.compile(r"(?i)\A[^a-z0-9]*![^a-z]*delete[^a-z0-9]*\Z")
     NOT_OP_BUT_OK_REGEX = re.compile(r"(?i)!notopbutok")
-    ARTICLE_REQUEST_REGEX = re.compile(r"(?i)!(article[^a-z0-9]*request|request[^a-z0-9]*article)")
+    ARTICLE_REQUEST_REGEX = re.compile(r"(?i)[^`]!(article[^a-z0-9]*request|request[^a-z0-9]*article)[^`]")
     NOMINATE_REGEX = re.compile(r"(?i)(?:^|\n\n)!nominate *(?P<category>\w*) *(?P<reason>(?:.|\n.)*)")
     # https://github.com/reddit-archive/reddit/blob/753b17407e9a9dca09558526805922de24133d53/r2/r2/models/subreddit.py#L114=
     SELF_REGEX = re.compile(r"(?i)\Aself\.[a-z0-9][a-z0-9_]{1,20}\Z")
