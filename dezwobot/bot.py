@@ -244,7 +244,8 @@ class Bot:
         if re.search(self.SELF_REGEX, submission.domain):
             return SubmissionType.no_paywall
         exact_match = submission_types.get(submission.domain)
-        domain = ".".join(tldextract.extract(submission.domain)[1:])
+        r = tldextract.extract(submission.domain)
+        domain = f'{r.domain}.{r.suffix}'
         domain_match = submission_types.get(domain)
         st = exact_match or domain_match or SubmissionType.no_paywall
         if callable(st):
